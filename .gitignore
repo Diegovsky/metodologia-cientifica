@@ -1,0 +1,4 @@
+codigo/{selection,insertion,tree}sort
+*.o
+*.yml
+*.svg
