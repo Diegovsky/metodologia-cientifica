@@ -1,4 +1,15 @@
 #!/usr/bin/env fish
+function gen-elements -a i
+    perl -E 'for (1..'$i') { print int(rand(1e9)), " " } say ""'
+end
+
+if test "$argv[1]" = worst
+    echo $argv[1]
+    function gen-elements -a i
+        perl -E 'for (1..'$i') { print '$i'-$_, " " } say ""'
+    end
+end
+
 for algo in {tree,insertion,selection}sort
 
     set command codigo/$algo
@@ -13,6 +24,6 @@ for algo in {tree,insertion,selection}sort
 
         echo "Running $i..." >&2
         echo "$i:"
-        perl -E 'for (1..'$i') { print int(rand(1e9)), " " } say ""' | $command
+        gen-elements $i | $command
     end >"dados/results-$algo.yml"
 end

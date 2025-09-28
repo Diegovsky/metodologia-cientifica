@@ -1,6 +1,10 @@
+#!/usr/bin/env python3
 import matplotlib.pyplot as plt
 import numpy as np
 import yaml
+import sys
+
+name = sys.argv[1] if len(sys.argv) > 1 else ""
 
 plt.figure(figsize=(8, 6))
 for algo in ["treesort", "insertionsort", "selectionsort"]:
@@ -19,8 +23,14 @@ plt.xlabel("Input size (N)")
 plt.ylabel("Time (s)")
 plt.xscale("log")
 plt.yscale("log")
-plt.title("All Algorithms comparison")
+plt.title("Todos os Algoritmos" + f" ({name})" if name else "")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("dados/all.svg")
+if name:
+    filename = f"dados/all-{name}.svg"
+else:
+    filename = "dados/all.svg"
+
+
+plt.savefig(filename)

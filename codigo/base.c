@@ -48,6 +48,7 @@ int main(int argc, char** argv) {
       size--;
     }
   }
+  fclose(input);
 
   record_time();
   sort(arr, size);
